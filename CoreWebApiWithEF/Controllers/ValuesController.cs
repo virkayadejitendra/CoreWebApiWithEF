@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using CoreWebApiWithEF.Models;
 
 namespace CoreWebApiWithEF.Controllers
 {
@@ -10,11 +11,26 @@ namespace CoreWebApiWithEF.Controllers
     [ApiController]
     public class ValuesController : ControllerBase
     {
+        private BloggingContext _dbContext;
+        public ValuesController(BloggingContext context)
+        {
+            _dbContext= context;
+        }
         // GET api/values
         [HttpGet]
         public ActionResult<IEnumerable<string>> Get()
         {
-            return new string[] { "value1", "value2" };
+                
+                var blogs = _dbContext.Blogs
+                    .OrderBy(b => b.BlogId)
+                    ;
+        List<string> allUrls=new List<string>();
+        foreach(var item in blogs)
+        {
+            allUrls.Add(item.Url);
+        }
+
+            return allUrls.ToArray();
         }
 
         // GET api/values/5
@@ -28,6 +44,8 @@ namespace CoreWebApiWithEF.Controllers
         [HttpPost]
         public void Post([FromBody] string value)
         {
+            _dbContext.Add(new Blog { Url = "http://blogs.msdn.com/adonet " + value +" on "+DateTime.Now.ToLongTimeString() });
+                _dbContext.SaveChanges();
         }
 
         // PUT api/values/5

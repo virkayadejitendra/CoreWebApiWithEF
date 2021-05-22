@@ -35,6 +35,9 @@ namespace CoreWebApiWithEF.Models
         public DbSet<User> Users { get; set; }
         public DbSet<Blog> Blogs { get; set; }
         public DbSet<Post> Posts { get; set; }
+        public DbSet<Student> Students { get; set; }
+        public DbSet<Grade> Grades { get; set; }
+
 
         // The following configures EF to create a Sqlite database file as `C:\blogging.db`.
         // For Mac or Linux, change this to `/tmp/blogging.db` or any other absolute path.
@@ -59,4 +62,16 @@ namespace CoreWebApiWithEF.Models
         public int BlogId { get; set; }
         public Blog Blog { get; set; }
     }
+public class Student
+{
+    public int StudentId { get; set; }
+    public string StudentName { get; set; }
+}
+       
+public class Grade
+{
+    public int GradeId { get; set; }
+    public string GradeName { get; set; }
+    public string Section { get; set; }
+}
 }

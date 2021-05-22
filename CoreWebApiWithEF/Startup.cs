@@ -11,7 +11,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Microsoft.EntityFrameworkCore;
-using CoreWebApiWithEF.Models;
+using  CoreWebApiWithEF.Models;
 namespace CoreWebApiWithEF
 {
     public class Startup
@@ -45,7 +45,7 @@ namespace CoreWebApiWithEF
                 app.UseHsts();
             }
 
-            app.UseHttpsRedirection();
+            //app.UseHttpsRedirection();
             app.UseMvc();
         }
     }
